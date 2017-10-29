@@ -223,8 +223,8 @@ contract CWPayroll is PayrollInterface, DateTimeUtils, usingOraclize {
            ERC20Token lToken  = ERC20Token(lFromAddress);              // This is the contract address of each token
            address lToAddress = employees[i].allowedTokens[j];
            
-           // transfer from the contract address to employee's token address. Assumes that no tokens were removed from distribution
-           lToken.transferFrom(lFromAddress, lToAddress, lValue);   
+           // transfer from the owner/creator to employee's token address. Assumes that no tokens were removed from distribution
+           lToken.transferFrom(msg.sender, lToAddress, lValue);   
            lEmployeeCount--;
            Log('allocation determined!');  
          }
